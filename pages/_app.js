@@ -1,8 +1,11 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
+  const customTheme = extendTheme(theme);
+
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <Component {...pageProps} />
     </ChakraProvider>
   );
