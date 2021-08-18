@@ -1,10 +1,10 @@
 import React from "react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { HiMoon, HiSun } from "react-icons/hi";
 import { Flex, Heading, IconButton, useColorMode } from "@chakra-ui/react";
 
 const colorModeIcons = {
-  light: <MoonIcon />,
-  dark: <SunIcon />,
+  light: <HiMoon />,
+  dark: <HiSun />,
 };
 
 const Header = () => {
@@ -25,11 +25,12 @@ const Header = () => {
         w="100%"
         maxW="container.lg"
       >
-        <Heading size="sm">City Summarizer</Heading>
+        <Heading size="sm">Made by João Correia</Heading>
         <IconButton
           aria-label="toggle-dark-mode"
           icon={colorModeIcons[colorMode]}
           onClick={toggleColorMode}
+          fontSize="1.2em"
         />
       </Flex>
     </Flex>
