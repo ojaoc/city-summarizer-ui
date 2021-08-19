@@ -17,8 +17,9 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
-    "sass": "^1.38.0",
-    "swr": "^0.5.6"
+    "react-select": "^4.3.1",
+    "react-select-async-paginate": "^0.5.3",
+    "sass": "^1.38.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
