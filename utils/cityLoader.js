@@ -2,6 +2,13 @@
 the fetch request if another request comes in. This prevents unnecessary 
 requests to be fulfilled if the user keeps typing */
 
+const sleep = (ms) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+
 const quantPerPage = 10;
 let abortControllerList = [];
 
@@ -12,6 +19,12 @@ const loadCityList = async (search, loadedOptions) => {
   const abortController = new AbortController();
   const { signal } = abortController;
   abortControllerList.push(abortController);
+
+  await sleep(650); /* 
+  Sleep will wait a bit before making the request
+  So if a user types fast only the last request with the full search 
+  string will be made
+  */
 
   if (search) {
     const response = await fetch(
