@@ -2,23 +2,7 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Header from "../components/Header";
 import { AsyncPaginate } from "react-select-async-paginate";
-
-const quantPerPage = 10;
-
-const loadCityList = async (search, loadedOptions, { page }) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/city/list?q=${search}&offset=${loadedOptions.length}`
-  ).then((r) => r.json());
-
-  return {
-    options: response.data,
-    hasMore:
-      loadedOptions.length + quantPerPage <= response.metadata.totalCount,
-    additional: {
-      page: page + 1,
-    },
-  };
-};
+import loadCityList from "../utils/cityLoader";
 
 const customStyles = {
   container: (provided, state) => ({
@@ -30,6 +14,20 @@ const customStyles = {
 
 const Index = () => {
   const [selectValue, setSelectValue] = useState([]);
+  const [inputValue, onInputChangeRaw] = useState("");
+  const [inputHistory, setInputHistory] = useState([]);
+
+  const onInputChange = (newInputValue, { action }) => {
+    setInputHistory([
+      ...inputHistory,
+      {
+        inputValue: newInputValue,
+        action,
+      },
+    ]);
+
+    onInputChangeRaw(newInputValue);
+  };
 
   return (
     <>
@@ -47,17 +45,19 @@ const Index = () => {
             An useful app to obtain information about any city
           </Text>
           <AsyncPaginate
+            cacheOptions
             value={selectValue}
             loadOptions={loadCityList}
             onChange={setSelectValue}
-            additional={{
-              page: 1,
-            }}
             styles={customStyles}
             w="55%"
             minW="360px"
             isMulti
             closeMenuOnSelect={false}
+            placeholder="Search city..."
+            inputValue={inputValue}
+            onInputChange={onInputChange}
+            menuIsOpen={inputValue !== ""}
           />
         </Flex>
       </Flex>
