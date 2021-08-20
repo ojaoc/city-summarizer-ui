@@ -20,7 +20,7 @@ const loadCityList = async (search, loadedOptions) => {
   const { signal } = abortController;
   abortControllerList.push(abortController);
 
-  await sleep(650); /* 
+  await sleep(600); /* 
   Sleep will wait a bit before making the request
   So if a user types fast only the last request with the full search 
   string will be made
