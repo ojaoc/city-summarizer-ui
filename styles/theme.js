@@ -1,4 +1,8 @@
 const theme = {
+  fonts: {
+    heading: "Maven Pro",
+    body: "Maven Pro",
+  },
   styles: {
     global: {
       "html, body": {

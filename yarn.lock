@@ -734,6 +734,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/maven-pro@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/maven-pro/-/maven-pro-4.5.0.tgz#8ab6c3a4a56c631e52d85077b8a832f048ae5a57"
+  integrity sha512-2WZEkPWRyHgPl/o3aBXaLyLin46u0pHFPVXbixsJPy4Bq1TjwLWywMxCY3fTBtawI8zYNGRNZhrziqMUpFcrCg==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
