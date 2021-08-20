@@ -5,8 +5,6 @@ import { AsyncPaginate } from "react-select-async-paginate";
 
 const quantPerPage = 10;
 
-// THE REASON THIS IS NOT WORKING IS BECAUSE OF THE THIRD ARGUMENT OF THE FUNCTION.
-// REMOVE IT AND IT WILL FETCH, BUT THEN I WILL NEED TO FIGURE OUT HOW TO RETRIEVE PAGINATION
 const loadCityList = async (search, loadedOptions, { page }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/city/list?q=${search}&offset=${loadedOptions.length}`
@@ -52,7 +50,7 @@ const Index = () => {
             value={selectValue}
             loadOptions={loadCityList}
             onChange={setSelectValue}
-            aditional={{
+            additional={{
               page: 1,
             }}
             styles={customStyles}
