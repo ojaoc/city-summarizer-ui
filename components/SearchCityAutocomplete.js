@@ -10,8 +10,7 @@ const customStyles = {
   }),
 };
 
-const SearchCityAutocomplete = () => {
-  const [selectValue, setSelectValue] = useState([]);
+const SearchCityAutocomplete = ({ selectValue, setSelectValue }) => {
   const [inputValue, onInputChangeRaw] = useState("");
   const [inputHistory, setInputHistory] = useState([]);
 
