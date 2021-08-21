@@ -55,9 +55,10 @@ const Index = () => {
             justifyContent="center"
             w="100%"
             initial={{ opacity: 0 }}
+            mb={6}
             animate={{
               opacity: 1,
-              y: selectValue.length > 0 ? "-1.5vh" : "19vh",
+              y: selectValue.length > 0 ? "-1.5vh" : "20vh",
             }}
           >
             <AppHeading />
@@ -70,13 +71,13 @@ const Index = () => {
           </MotionComponent>
           {/* This ZIndex condition is under here because the bar chart 
           was overlaying the autocomplete menu */}
-          <Flex h="45vh" w="100%">
+          <Flex h="50vh" w="100%">
             <Flex w="55%" zIndex={inputValue ? -1 : undefined}>
               {selectValue.length > 0 && (
                 <CityTemperaturesBarChart data={cityDetailsData} />
               )}
             </Flex>
-            <Box w="45%" pt={6}>
+            <Box w="45%">
               {selectValue.length > 0 && (
                 <CityDetailsTable detailsList={cityDetailsData} />
               )}
