@@ -62,6 +62,8 @@ const Index = () => {
               onInputChangeRaw={onInputChangeRaw}
             />
           </MotionComponent>
+          {/* This ZIndex condition is under here because the bar chart 
+          was overlaying the autocomplete menu */}
           <Flex h="45vh" w="100%" zIndex={inputValue ? -1 : undefined}>
             {selectValue.length > 0 && (
               <CityTemperaturesBarChart data={barChartData} />
