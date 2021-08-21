@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Header from "../components/Header";
 import AppHeading from "../components/AppHeading";
 import SearchCityAutocomplete from "../components/SearchCityAutocomplete";
 import CityTemperaturesBarChart from "../components/CityTemperaturesBarChart";
 import cityDetailsLoader from "../utils/cityDetailsLoader";
 import { motion } from "framer-motion";
+import Head from "next/head";
+import CityDetailsTable from "../components/CityDetailsTable";
 
 // eslint-disable-next-line react/display-name
 const FlexForMotion = React.forwardRef((props, ref) => (
@@ -17,7 +19,7 @@ const MotionComponent = motion(FlexForMotion);
 const Index = () => {
   const [selectValue, setSelectValue] = useState([]);
   const [inputValue, onInputChangeRaw] = useState("");
-  const [barChartData, setBarChartData] = useState([]);
+  const [cityDetailsData, setCityDetailsData] = useState([]);
 
   const selectValueAsString = JSON.stringify(selectValue);
 
@@ -26,7 +28,7 @@ const Index = () => {
       const cityDetails = await cityDetailsLoader(
         selectValue.map(({ value }) => value)
       );
-      setBarChartData(cityDetails);
+      setCityDetailsData(cityDetails);
     }
     setCityData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,10 +36,14 @@ const Index = () => {
 
   return (
     <>
+      <Head>
+        <title>City Summarizer</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Header />
       <Flex h="100vh" alignItems="center" justifyContent="center">
         <Flex
-          maxW="container.lg"
+          maxW="container.xl"
           direction="column"
           alignItems="center"
           justifyContent="center"
@@ -64,10 +70,17 @@ const Index = () => {
           </MotionComponent>
           {/* This ZIndex condition is under here because the bar chart 
           was overlaying the autocomplete menu */}
-          <Flex h="45vh" w="100%" zIndex={inputValue ? -1 : undefined}>
-            {selectValue.length > 0 && (
-              <CityTemperaturesBarChart data={barChartData} />
-            )}
+          <Flex h="45vh" w="100%">
+            <Flex w="55%" zIndex={inputValue ? -1 : undefined}>
+              {selectValue.length > 0 && (
+                <CityTemperaturesBarChart data={cityDetailsData} />
+              )}
+            </Flex>
+            <Box w="45%" pt={6}>
+              {selectValue.length > 0 && (
+                <CityDetailsTable detailsList={cityDetailsData} />
+              )}
+            </Box>
           </Flex>
         </Flex>
       </Flex>

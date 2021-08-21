@@ -20,7 +20,7 @@ const CityTemperaturesBarChart = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Temp",
+      legend: "Temp (Cº)",
       legendPosition: "middle",
       legendOffset: -40,
     }}

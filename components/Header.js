@@ -23,7 +23,7 @@ const Header = () => {
         justifyContent="space-between"
         padding={4}
         w="100%"
-        maxW="container.lg"
+        maxW="container.xl"
       >
         <Heading size="sm">Made by João Correia</Heading>
         <IconButton
