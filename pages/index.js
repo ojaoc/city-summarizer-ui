@@ -16,6 +16,7 @@ const MotionComponent = motion(FlexForMotion);
 
 const Index = () => {
   const [selectValue, setSelectValue] = useState([]);
+  const [inputValue, onInputChangeRaw] = useState("");
   const [barChartData, setBarChartData] = useState([]);
 
   const selectValueAsString = JSON.stringify(selectValue);
@@ -57,9 +58,11 @@ const Index = () => {
             <SearchCityAutocomplete
               selectValue={selectValue}
               setSelectValue={setSelectValue}
+              inputValue={inputValue}
+              onInputChangeRaw={onInputChangeRaw}
             />
           </MotionComponent>
-          <Flex h="45vh" w="100%">
+          <Flex h="45vh" w="100%" zIndex={inputValue ? -1 : undefined}>
             {selectValue.length > 0 && (
               <CityTemperaturesBarChart data={barChartData} />
             )}
