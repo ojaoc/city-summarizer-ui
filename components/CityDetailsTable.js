@@ -27,7 +27,7 @@ const CityDetailsTable = ({ detailsList }) => {
         accessor: "city",
       },
       {
-        Header: "Temperature",
+        Header: "Temp (Cº)",
         accessor: "temp",
         isNumeric: true,
       },
