@@ -8,6 +8,7 @@ const customStyles = {
     ...provided,
     width: state.selectProps.w,
     minWidth: state.selectProps.minW,
+    maxWidth: state.selectProps.maxW,
   }),
   control: (provided, state) => ({
     ...provided,
@@ -70,6 +71,7 @@ const SearchCityAutocomplete = ({
       onChange={setSelectValue}
       styles={customStyles}
       w="55%"
+      maxW="650px"
       minW="360px"
       color={color}
       bg={bg}

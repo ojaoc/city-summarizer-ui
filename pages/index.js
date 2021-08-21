@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import Header from "../components/Header";
 import AppHeading from "../components/AppHeading";
 import SearchCityAutocomplete from "../components/SearchCityAutocomplete";
@@ -20,15 +20,30 @@ const Index = () => {
   const [selectValue, setSelectValue] = useState([]);
   const [inputValue, onInputChangeRaw] = useState("");
   const [cityDetailsData, setCityDetailsData] = useState([]);
+  const [loadingCityDetails, setLoadingCityDetails] = useState(false);
 
   const selectValueAsString = JSON.stringify(selectValue);
+  const toast = useToast();
 
   useEffect(() => {
     async function setCityData() {
-      const cityDetails = await cityDetailsLoader(
-        selectValue.map(({ value }) => value)
-      );
-      setCityDetailsData(cityDetails);
+      setLoadingCityDetails(true);
+      try {
+        const cityDetails = await cityDetailsLoader(
+          selectValue.map(({ value }) => value)
+        );
+        setCityDetailsData(cityDetails.sort((a, b) => a.temp - b.temp)); // sorts asc by temp
+      } catch (err) {
+        setSelectValue(selectValue.slice(0, -1)); // Remove last selected item since it it invalid
+        toast({
+          title: "Could not any find info about the selected city",
+          status: "error",
+          duration: 7500,
+          isClosable: true,
+        });
+      } finally {
+        setLoadingCityDetails(false);
+      }
     }
     setCityData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,12 +77,15 @@ const Index = () => {
             }}
           >
             <AppHeading />
-            <SearchCityAutocomplete
-              selectValue={selectValue}
-              setSelectValue={setSelectValue}
-              inputValue={inputValue}
-              onInputChangeRaw={onInputChangeRaw}
-            />
+            <Flex alignItems="center" justifyContent="center" w="100%">
+              <SearchCityAutocomplete
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+                inputValue={inputValue}
+                onInputChangeRaw={onInputChangeRaw}
+              />
+              {loadingCityDetails && <Spinner ml={4} />}
+            </Flex>
           </MotionComponent>
           {/* This ZIndex condition is under here because the bar chart 
           was overlaying the autocomplete menu */}
