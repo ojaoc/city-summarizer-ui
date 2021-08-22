@@ -8,6 +8,7 @@ import cityDetailsLoader from "../utils/cityDetailsLoader";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import CityDetailsTable from "../components/CityDetailsTable";
+import IconWalkthrough from "../components/IconWalkthrough";
 
 // eslint-disable-next-line react/display-name
 const FlexForMotion = React.forwardRef((props, ref) => (
@@ -101,6 +102,8 @@ const Index = () => {
               )}
             </Box>
           </Flex>
+
+          {selectValue.length === 0 && <IconWalkthrough />}
         </Flex>
       </Flex>
     </>

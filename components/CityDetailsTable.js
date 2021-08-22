@@ -29,6 +29,7 @@ const CityDetailsTable = ({ detailsList }) => {
       {
         Header: "Temp (Cº)",
         accessor: "temp",
+        Cell: ({ cell: { value } }) => `${value}º`,
         isNumeric: true,
       },
       {

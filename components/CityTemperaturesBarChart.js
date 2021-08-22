@@ -9,6 +9,8 @@ const CityTemperaturesBarChart = ({ data }) => {
   const tooltipTextColor = useColorModeValue("#333333", "#FFF");
   const strokeColor = useColorModeValue("#E2E8F0", "#303541");
   const bg = useColorModeValue("#FFF", "#1A1F2C");
+  const barColor = useColorModeValue("#d4f2ff", "#3d5a80");
+  const strokebarColor = useColorModeValue("#E2E8F0", "#808080");
 
   return (
     <ResponsiveBar
@@ -38,7 +40,9 @@ const CityTemperaturesBarChart = ({ data }) => {
         left: 60,
       }}
       padding={paddingArr[data.length - 1] ?? 0.3}
-      colors={{ scheme: "nivo" }}
+      colors={barColor}
+      borderWidth="1px"
+      borderColor={strokebarColor}
       colorBy="temp"
       theme={{
         textColor,
@@ -49,7 +53,7 @@ const CityTemperaturesBarChart = ({ data }) => {
         },
         labels: {
           text: {
-            fill: "#333",
+            fill: textColor,
           },
         },
         tooltip: {
