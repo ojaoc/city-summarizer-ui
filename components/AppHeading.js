@@ -6,7 +6,7 @@ const AppHeading = () => {
     <>
       <Heading mb={4}>City Summarizer</Heading>
       <Text color="gray" mb={8}>
-        An useful app to obtain information about any city
+        Useful app to obtain information about any city
       </Text>
     </>
   );
